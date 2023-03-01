@@ -1,0 +1,22 @@
+{
+  "name": "employee_profile_generator",
+  "version": "1.0.0",
+  "description": "This is a employee profile generator application.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PuspitaGoswami/employee_profile_generator.git"
+  },
+  "author": "puspita",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PuspitaGoswami/employee_profile_generator/issues"
+  },
+  "homepage": "https://github.com/PuspitaGoswami/employee_profile_generator#readme"
+}
