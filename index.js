@@ -1,9 +1,10 @@
+
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
-const fs = require("fs");
+const fs = require("fs"); 
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -96,7 +97,6 @@ const menuQuestions = [
   },
 ];
 
-// Prompt the manager questions first
 inquirer.prompt(managerQuestions).then((managerAnswers) => {
   const manager = new Manager(
     managerAnswers.name,
@@ -106,7 +106,6 @@ inquirer.prompt(managerQuestions).then((managerAnswers) => {
   );
   teamMembers.push(manager);
 
-  // Define a function to display the main menu
   const promptMenu = () => {
     inquirer.prompt(menuQuestions).then((menuAnswer) => {
       switch (menuAnswer.menu) {
@@ -119,7 +118,7 @@ inquirer.prompt(managerQuestions).then((managerAnswers) => {
               engineerAnswers.github
             );
             teamMembers.push(engineer);
-            promptMenu(); // Go back to the main menu
+            promptMenu();
           });
           break;
         case "Add an intern":
@@ -131,16 +130,24 @@ inquirer.prompt(managerQuestions).then((managerAnswers) => {
               internAnswers.school
             );
             teamMembers.push(intern);
-            promptMenu(); // Go back to the main menu
+            promptMenu();
           });
           break;
         case "Finish building the team":
           console.log("Team Generated");
-          // Generate the team HTML file
-          fs.writeFileSync(outputPath, render(teamMembers));
+          buildTeam();
           break;
       }
     });
   };
   promptMenu();
+
+  function buildTeam() {
+    // Create the output directory if the output path doesn't exist
+    if (!fs.existsSync(OUTPUT_DIR)) {
+      fs.mkdirSync(OUTPUT_DIR)
+    }
+    fs.writeFileSync(outputPath, render(teamMembers), "utf-8");
+  }
+
 });
