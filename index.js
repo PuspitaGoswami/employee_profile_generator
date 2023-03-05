@@ -96,4 +96,51 @@ const menuQuestions = [
   },
 ];
 
+// Prompt the manager questions first
+inquirer.prompt(managerQuestions).then((managerAnswers) => {
+  const manager = new Manager(
+    managerAnswers.name,
+    managerAnswers.id,
+    managerAnswers.email,
+    managerAnswers.officeNumber
+  );
+  teamMembers.push(manager);
 
+  // Define a function to display the main menu
+  const promptMenu = () => {
+    inquirer.prompt(menuQuestions).then((menuAnswer) => {
+      switch (menuAnswer.menu) {
+        case "Add an engineer":
+          inquirer.prompt(engineerQuestions).then((engineerAnswers) => {
+            const engineer = new Engineer(
+              engineerAnswers.name,
+              engineerAnswers.id,
+              engineerAnswers.email,
+              engineerAnswers.github
+            );
+            teamMembers.push(engineer);
+            promptMenu(); // Go back to the main menu
+          });
+          break;
+        case "Add an intern":
+          inquirer.prompt(internQuestions).then((internAnswers) => {
+            const intern = new Intern(
+              internAnswers.name,
+              internAnswers.id,
+              internAnswers.email,
+              internAnswers.school
+            );
+            teamMembers.push(intern);
+            promptMenu(); // Go back to the main menu
+          });
+          break;
+        case "Finish building the team":
+          console.log("Team Generated");
+          // Generate the team HTML file
+          fs.writeFileSync(outputPath, render(teamMembers));
+          break;
+      }
+    });
+  };
+  promptMenu();
+});
