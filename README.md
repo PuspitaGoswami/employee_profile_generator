@@ -11,7 +11,6 @@ This is a command-line application that generates a team profile HTML file based
 - [Questions](#Questions)
 
 
-
 ## Installation {#Installation}
 To install the application, follow these steps:
 
@@ -42,3 +41,6 @@ Run the command npm test to run the test suite.
 
 ## Questions
 If you have any questions about the project, open an issue or contact me directly at puspitagoswami14@gmail.com. You can find more of my work on my Github profile: https://github.com/PuspitaGoswami.
+
+![Commandline Screenshot](images/s1.JPG)
+![Browser screenshot](images/s2.JPG)
